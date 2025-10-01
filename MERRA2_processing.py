@@ -2,13 +2,7 @@
 #This code requires the following argument ['N' or 'S']
 
 import numpy as np
-import numpy.ma as ma
-import matplotlib as mpl
-import matplotlib.pyplot as plt
 import xarray as xr
-import netCDF4
-import datetime
-import time
 import sys
 
 POLE=sys.argv[1]
