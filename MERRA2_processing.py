@@ -1,11 +1,20 @@
 #! /usr/bin/env python
-#This code requires the following argument ['N' or 'S']
 
 import numpy as np
 import xarray as xr
-import sys
+import argparse
 
-POLE=sys.argv[1]
+choicelist = ['N', 'S']
+parser = argparse.ArgumentParser(description="Parse input vars")
+parser.add_argument('pole',
+                    metavar='P',
+                    type=str, 
+                    choices=choicelist,
+                    help = f"(Pole {', '.join(choicelist)})",
+                    )
+args = parser.parse_args() 
+POLE = args.pole
+
 DIR = '/discover/nobackup/hzafar/MERRA2'
 years = np.arange(1990,2011,1)
 months = np.arange(1,13)
