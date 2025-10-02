@@ -1,25 +1,34 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
+# Script used to process MERRA-2 data on discover for other analysis
 
 import numpy as np
 import xarray as xr
 import argparse
 
-choicelist = ['N', 'S']
-parser = argparse.ArgumentParser(description="Parse input vars")
+parser = argparse.ArgumentParser(description="User-specified parameters")
+polelist = ['N', 'S']
 parser.add_argument('pole',
                     metavar='P',
                     type=str, 
-                    choices=choicelist,
-                    help = f"(Pole {', '.join(choicelist)})",
+                    choices=polelist,
+                    help = f"Pole ({', '.join(polelist)})",
                     )
-args = parser.parse_args() 
-POLE = args.pole
 
-DIR = '/discover/nobackup/hzafar/MERRA2'
+varlist = ["SLP", "PRECSNO", "TS"]
+parser.add_argument('var',
+                    metavar='var',
+                    type=str,
+                    choices=varlist,
+                    help = f"MERRA-2 Variable ({', '.join(varlist)})",
+                    )
+args = parser.parse_args()
+POLE = args.pole
+VAR = args.var
+
+DIR = '/discover/nobackup/hzafar/MERRA2_all' # Made a new symlink to MERRA-2 data
 years = np.arange(1990,2011,1)
 months = np.arange(1,13)
 
-'''
 ####### SLP ####################################
 var_name = 'SLP'
 vars = [var_name]
@@ -73,9 +82,7 @@ print('Dataset written to .csv file')
 #path = 'transfer/'+filename
 #ds_MERRA2.to_csv(path)
 #print('Dataset written to .csv file')
-'''
 
-'''
 ############ SNOWFALL############
 var_name = 'PRECSNO'
 vars = [var_name]
@@ -104,12 +111,10 @@ filename = 'MERRA2_extract_'+ var_name + '_' + POLE  + '.csv'
 path = 'transfer/'+filename
 ds_MERRA2.to_csv(path)
 print('Dataset written to .csv file')
-'''
 
 
 
 
-#'''
 ############ SKIN TEMP###########
 var_name = 'TS'
 vars = [var_name]
@@ -138,6 +143,5 @@ filename = 'MERRA2_extract_'+ var_name + '_' + POLE  + '.csv'
 path = 'transfer/'+filename
 ds_MERRA2.to_csv(path)
 print('Dataset written to .csv file')
-#'''
 
 
