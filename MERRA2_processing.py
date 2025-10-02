@@ -54,6 +54,9 @@ if VAR=='SLP':
     ds_MERRA2.to_csv(path)
     print('Dataset written to .csv file')
 
+'''
+Data in block not yet updated per 2025 edits
+
 ########### SEASONAL MAX/MIN ONLY (OLD)
 #if POLE == 'N':
 #  SEASON=['M03', 'M09']
@@ -141,5 +144,5 @@ filename = 'MERRA2_extract_'+ var_name + '_' + POLE  + '.csv'
 path = 'transfer/'+filename
 ds_MERRA2.to_csv(path)
 print('Dataset written to .csv file')
-
+'''
 
