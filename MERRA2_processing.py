@@ -26,8 +26,9 @@ POLE = args.pole
 VAR = args.var
 
 DIR = '/discover/nobackup/hzafar/MERRA2_processing/MERRA2_all' # Made a new symlink to MERRA-2 data
-years = np.arange(1990,2011,1)
-months = np.arange(1,13)
+start_yr, end_yr = [1990, 2010]
+years = [str(year) for year in range(start_yr, end_yr+1)] 
+months_mm = [f"{i:02d}" for i in range(1, 13)]
 
 ####### SLP ####################################
 var_name = 'SLP'
