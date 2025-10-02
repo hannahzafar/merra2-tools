@@ -24,6 +24,7 @@ parser.add_argument('var',
 args = parser.parse_args()
 POLE = args.pole
 VAR = args.var
+#NOTE: Frequency (FREQ) variable? I'm just do monthly means I guess, before I was using monthly mean only but now I want MAT/MAP, so average from monthly?
 
 DIR = '/discover/nobackup/hzafar/MERRA2_processing/MERRA2_all' # Made a new symlink to MERRA-2 data
 start_yr, end_yr = [1990, 2010]
