@@ -25,7 +25,7 @@ args = parser.parse_args()
 POLE = args.pole
 VAR = args.var
 
-DIR = '/discover/nobackup/hzafar/MERRA2_all' # Made a new symlink to MERRA-2 data
+DIR = '/discover/nobackup/hzafar/MERRA2_processing/MERRA2_all' # Made a new symlink to MERRA-2 data
 years = np.arange(1990,2011,1)
 months = np.arange(1,13)
 
