@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Script used to process MERRA-2 data on discover for other analysis
+# Script used to process MERRA-2 data on discover for GEOS-S2S project
 
 import xarray as xr
 import argparse
@@ -24,7 +24,6 @@ parser.add_argument('var',
 args = parser.parse_args()
 POLE = args.pole
 VAR = args.var
-#NOTE: Frequency (FREQ) variable? I'm just do monthly means I guess, before I was using monthly mean only but now I want MAT/MAP, so average from monthly?
 
 DIR = '/discover/nobackup/hzafar/MERRA2_processing/MERRA2_all' # Made a new symlink to MERRA-2 data
 start_yr, end_yr = [1990, 2010]
@@ -112,8 +111,6 @@ filename = 'MERRA2_extract_'+ var_name + '_' + POLE  + '.csv'
 path = 'transfer/'+filename
 ds_MERRA2.to_csv(path)
 print('Dataset written to .csv file')
-
-
 
 
 ############ SKIN TEMP###########
