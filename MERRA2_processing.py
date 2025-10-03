@@ -37,7 +37,7 @@ if VAR=='SLP':
     for year in years:
         # for mon in months_mm:
             # fname = DIR+'/Y'+str(year)+'/M' + mon +'/MERRA2.tavgM_2d_slv_Nx.'+str(year)+ mon +'.nc4' # Old way of finding only extact files
-        fnames = sorted(glob.glob( DIR+'/Y' + str(year) +'/M*/MERRA2.tavgM_2d_slv_Nx.*.nc4')) # Uses glob function, beware
+        fnames = sorted(glob.glob(f"{DIR}/Y{year}/M*/MERRA2.tavgM_2d_slv_Nx.{year}*.nc4"))
         flist= flist + fnames
 
     ds_MERRA2 = xr.open_mfdataset(flist,parallel=True, chunks = {'time':10})[VAR]
