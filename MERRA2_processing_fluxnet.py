@@ -4,6 +4,13 @@
 import xarray as xr
 import argparse
 import glob
+import sys
+
+# Debugging function to print
+def print_special(*lists):
+    for list in lists:
+        print(*list, sep="\n")
+
 
 parser = argparse.ArgumentParser(description="User-specified parameters")
 
@@ -45,38 +52,37 @@ parser.add_argument('var',
 
 args = parser.parse_args()
 freqF = str(args.freq1) + str(args.freq2)
+group = args.group
 VAR = args.var
 print(freqF, VAR) #Note that now VAR is a list, but we can just loop over it right?
 
 # Hard code the rest:
 HV = 'Nx'
-DIR = '/discover/nobackup/hzafar/MERRA2_processing/MERRA2_all' # Made a new symlink to MERRA-2 data
+dir = '/discover/nobackup/hzafar/MERRA2_processing/MERRA2_all' # Made a new symlink to MERRA-2 data
 
-#TODO: add an arg for FREQ (tavgM) Actually I think everything is tavg M, since before I was using monthly means and now I need to do annual so I will have to select from the monthly and average. What's different is the N/S, now I want the specific lat/lon of the sites. So maybe change that arg around 
+
 #NOTE: How am I going to select years? If Amerflux varies? Similar to MiCASA I suppose, or should I look at all the years I have a record from and average across long time series??? 
-
-start_yr, end_yr = [1990, 2010]
+start_yr, end_yr = [2023, 2024]
 years = [str(year) for year in range(start_yr, end_yr+1)] 
 
 
-####### SLP ####################################
-if VAR=='SLP':
-    flist = []
-    for year in years:
-        fnames = sorted(glob.glob( DIR+'/Y' + str(year) +'/M*/MERRA2.tavgM_2d_slv_Nx.*.nc4')) # Uses glob function, beware
-        flist= flist + fnames
+flist = []
+for year in years:
+    filenames = sorted(glob.glob(f"{dir}/Y{year}/M*/MERRA2.{freqF}_2d_{group}_{HV}.*.nc4"))
 
-    ds_MERRA2 = xr.open_mfdataset(flist,parallel=True, chunks = {'time':10})[VAR]
-    if POLE == 'N':
-        ds_MERRA2 = ds_MERRA2.where(ds_MERRA2.lat>=60,drop=True).mean(dim=["lat","lon"])
-    else:
-        ds_MERRA2 = ds_MERRA2.where(ds_MERRA2.lat<=-60,drop=True).mean(dim=["lat","lon"])
+    # print(*filenames[:10], sep="\n")
+    flist = flist + filenames
+    # sys.exit()
+# print(*flist[:10], *flist[-10:], sep='\n')
+print_special(flist[:10],flist[-10:])
+sys.exit()
+ds_MERRA2 = xr.open_mfdataset(filepaths,parallel=True, chunks = {'time':10})[VAR]
 
-    ds_MERRA2 = ds_MERRA2.to_dataframe()
-    ds_MERRA2.index = ds_MERRA2.index.normalize() #This gets rid of the 30 min time stamp?
-    filename = 'MERRA2_extract_'+ VAR + '_' + POLE  + '.csv'
-    path = 'transfer/' + filename
-    ds_MERRA2.to_csv(path)
-    print('Dataset written to .csv file')
+ds_MERRA2 = ds_MERRA2.to_dataframe()
+ds_MERRA2.index = ds_MERRA2.index.normalize() #This gets rid of the 30 min time stamp?
+filename = 'MERRA2_extract_'+ VAR + '_' + POLE  + '.csv'
+path = 'transfer/' + filename
+ds_MERRA2.to_csv(path)
+print('Dataset written to .csv file')
 
 
