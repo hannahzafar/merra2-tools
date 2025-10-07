@@ -57,10 +57,10 @@ parser.add_argument('end_yr',
 
 varlist = ["T2M", "PRECTOT"]
 # Should I make this as many inputs as you want?
-# Can I just dump out the T2M daily for every lat/lon of each flux site for the years I am concerned with? Look into what years I have
-parser.add_argument('var',
-                    metavar='VAR',
+parser.add_argument('--vars',
+                    metavar='var',
                     type=str,
+                    required=True,
                     nargs='+',
                     choices=varlist,
                     help = f"MERRA-2 Variable(s) ({', '.join(varlist)})",
@@ -69,13 +69,15 @@ parser.add_argument('var',
 args = parser.parse_args()
 freqF = str(args.freq1) + str(args.freq2)
 group = args.group
-VAR = args.var
-print(freqF, VAR) #Note that now VAR is a list, but we can just loop over it right?
 
 start_yr = args.start_yr
 if args.end_yr is None:
     args.end_yr=args.start_yr
 end_yr = args.end_yr
+
+var = args.vars
+#TODO: Ideally this would check if these vars are valid in that collection group
+
 # Hard code the rest:
 HV = 'Nx'
 dir = '/discover/nobackup/hzafar/MERRA2_processing/MERRA2_all' # Made a new symlink to MERRA-2 data
@@ -97,11 +99,11 @@ for year in years:
 # print(*flist[:10], *flist[-10:], sep='\n')
 print_special(flist[:10],flist[-10:])
 sys.exit()
-ds_MERRA2 = xr.open_mfdataset(filepaths,parallel=True, chunks = {'time':10})[VAR]
+ds_MERRA2 = xr.open_mfdataset(filepaths,parallel=True, chunks = {'time':10})[var]
 
 ds_MERRA2 = ds_MERRA2.to_dataframe()
 ds_MERRA2.index = ds_MERRA2.index.normalize() #This gets rid of the 30 min time stamp?
-filename = 'MERRA2_extract_'+ VAR + '_' + POLE  + '.csv'
+filename = 'MERRA2_extract_'+ var + '_' + POLE  + '.csv'
 path = 'transfer/' + filename
 ds_MERRA2.to_csv(path)
 print('Dataset written to .csv file')
