@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # Script used to process MERRA-2 data for fluxnet analysis. Modified from processing for GEOS-S2S
 
+import numpy as np
 import xarray as xr
 import argparse
 import glob
@@ -39,6 +40,21 @@ parser.add_argument('group',
                     help = f"MERRA-2 Collection Group ({', '.join(grouplist)})",
                     )
 
+year_list = np.arange(1980,2026)
+parser.add_argument('start_yr',
+                    metavar='start_yr',
+                    type=int,
+                    choices=year_list,
+                    help = f"Start Year ({year_list[0]}-{year_list[-1]})",
+                    )
+parser.add_argument('end_yr',
+                    metavar='end_yr',
+                    type=int,
+                    choices=year_list,
+                    nargs="?",
+                    help = f"End Year ({year_list[0]}-{year_list[-1]}), defaults to start_yr",
+                    )
+
 varlist = ["T2M", "PRECTOT"]
 # Should I make this as many inputs as you want?
 # Can I just dump out the T2M daily for every lat/lon of each flux site for the years I am concerned with? Look into what years I have
@@ -56,13 +72,18 @@ group = args.group
 VAR = args.var
 print(freqF, VAR) #Note that now VAR is a list, but we can just loop over it right?
 
+start_yr = args.start_yr
+if args.end_yr is None:
+    args.end_yr=args.start_yr
+end_yr = args.end_yr
 # Hard code the rest:
 HV = 'Nx'
 dir = '/discover/nobackup/hzafar/MERRA2_processing/MERRA2_all' # Made a new symlink to MERRA-2 data
 
 
 #NOTE: How am I going to select years? If Amerflux varies? Similar to MiCASA I suppose, or should I look at all the years I have a record from and average across long time series??? 
-start_yr, end_yr = [2023, 2024]
+#TODO: Go in to the fluxnet data and generate a list of the relevant years (min,max), then make a list of lat/lons, then grab all years within scope in lat/lons. Then maybe do something with that?
+# AmeriFlux FLUXNET spans 1991-2021 (see FLUXNET-Model-Comparison)
 years = [str(year) for year in range(start_yr, end_yr+1)] 
 
 
