@@ -12,13 +12,14 @@ def print_special(*lists):
     for list in lists:
         print(*list, sep="\n")
 
-
+# Refer to MERRA-2 File Specification
+# MERRA-2 data are organized into collections: freq_dims_group_HV
 parser = argparse.ArgumentParser(description="User-specified parameters")
 
-# MERRA-2 data are organized into collections: freq_dims_group_HV
+
 freq1list = ["cnst", "inst", "stat", "tavg"] # constant, instantaneous, statistics, timeaveraged 
 parser.add_argument('freq1',
-                    metavar='freq',
+                    metavar='freq1',
                     type=str,
                     choices=freq1list,
                     help = f"MERRA-2 Collection Frequency 1 ({', '.join(freq1list)})",
@@ -26,12 +27,12 @@ parser.add_argument('freq1',
 
 freq2list = ["1", "3", "6", "M", "D", "U", "0"] # Hourly, 3-Hourly, 6-Hourly, Monthly mean, Daily value, Monthly-Diurnal Mean, Not Applicable
 parser.add_argument('freq2',
-                    metavar='F',
+                    metavar='freq2',
                     type=str,
                     choices=freq2list,
-                    help = f"MERRA-2 Collection Sub-frequency ({', '.join(freq2list)})",
+                    help = f"MERRA-2 Collection Frequency 2 ({', '.join(freq2list)})",
                     )
-# Each collection has certain variables
+# Variables organized within collections
 grouplist = ['slv', 'asm', 'flx']
 parser.add_argument('group',
                     metavar='ggg',
@@ -88,24 +89,20 @@ dir = '/discover/nobackup/hzafar/MERRA2_processing/MERRA2_all' # Made a new syml
 # AmeriFlux FLUXNET spans 1991-2021 (see FLUXNET-Model-Comparison)
 years = [str(year) for year in range(start_yr, end_yr+1)] 
 
-
 flist = []
 for year in years:
     filenames = sorted(glob.glob(f"{dir}/Y{year}/M*/MERRA2.{freqF}_2d_{group}_{HV}.*.nc4"))
-
-    # print(*filenames[:10], sep="\n")
     flist = flist + filenames
-    # sys.exit()
-# print(*flist[:10], *flist[-10:], sep='\n')
-print_special(flist[:10],flist[-10:])
-sys.exit()
-ds_MERRA2 = xr.open_mfdataset(filepaths,parallel=True, chunks = {'time':10})[var]
+# print_special(flist[:10],flist[-10:])
 
-ds_MERRA2 = ds_MERRA2.to_dataframe()
-ds_MERRA2.index = ds_MERRA2.index.normalize() #This gets rid of the 30 min time stamp?
-filename = 'MERRA2_extract_'+ var + '_' + POLE  + '.csv'
-path = 'transfer/' + filename
-ds_MERRA2.to_csv(path)
-print('Dataset written to .csv file')
+ds_MERRA2 = xr.open_mfdataset(flist)[var]
+
+# This is all old from prev code
+# ds_MERRA2 = ds_MERRA2.to_dataframe()
+# ds_MERRA2.index = ds_MERRA2.index.normalize() #This gets rid of the 30 min time stamp?
+# filename = 'MERRA2_extract_'+ var + '_' + POLE  + '.csv'
+# path = 'transfer/' + filename
+# ds_MERRA2.to_csv(path)
+# print('Dataset written to .csv file')
 
 
