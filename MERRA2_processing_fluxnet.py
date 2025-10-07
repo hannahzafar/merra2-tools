@@ -56,7 +56,7 @@ parser.add_argument('end_yr',
                     help = f"End Year ({year_list[0]}-{year_list[-1]}), defaults to start_yr",
                     )
 
-varlist = ["T2M", "PRECTOT"]
+varlist = ["T2M", "T10M" ,"PRECTOT"]
 # Should I make this as many inputs as you want?
 parser.add_argument('--vars',
                     metavar='var',
@@ -78,6 +78,8 @@ end_yr = args.end_yr
 
 var = args.vars
 #TODO: Ideally this would check if these vars are valid in that collection group
+
+# print(freqF, group, start_yr, end_yr, var) #Note that now var is a list, but we can just loop over it right?
 
 # Hard code the rest:
 HV = 'Nx'
