@@ -1,3 +1,7 @@
 transfer*/
 MERRA2_all
 *.ipynb*
+
+# pixi environments
+.pixi
+*.egg-info
