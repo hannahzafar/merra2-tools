@@ -9,3 +9,7 @@ version = "0.1.0"
 [tasks]
 
 [dependencies]
+python = "3.13.*"
+numpy = ">=2.3.3,<3"
+pandas = ">=2.3.3,<3"
+xarray = ">=2025.10.1,<2026"
