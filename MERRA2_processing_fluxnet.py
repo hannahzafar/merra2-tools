@@ -14,8 +14,8 @@ start_yr, end_yr = [1991, 2021]
 freq1 = "tavg"
 freq2 = "M"
 group = "slv"
-vars = ["T2M"]
-# varlist = ["T2M", "T10M" ,"PRECTOT"]
+varslist = ["T2M", "T10M" ,"PRECTOT"] # vars should work as a list now
+vars = varslist[0]
 
 fileslist = find_MERRA2_files(dir, freq1, freq2, group, str(start_yr), str(end_yr))
 # print(type(fileslist))
