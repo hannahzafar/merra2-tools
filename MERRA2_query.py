@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # Input args to query for relevant MERRA-2 files
+# Refer to MERRA-2 File Specification
+# MERRA-2 data are organized into collections: freq_dims_group_HV
 
 import numpy as np
 import argparse
 import glob
-import sys
 
-# Debugging function to print
+# Function to print for debugging
 def print_special(*lists):
     for list in lists:
         print(*list, sep="\n")
