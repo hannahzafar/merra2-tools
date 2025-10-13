@@ -3,12 +3,10 @@
 
 import xarray as xr
 import sys
-from .query import find_MERRA2_files
 from virtualizarr import open_virtual_dataset
 
-#TODO: Turn these into path objects? Vzarr seems to use them?
-# Symlink to MERRA-2 data
-dir = '/discover/nobackup/hzafar/MERRA2_processing/MERRA2_all'
+from .config import MERRA2_ROOT
+from .query import find_MERRA2_files
 
 #NOTE: How am I going to select years, if Amerflux years varies across sites?
 # AmeriFlux FLUXNET spans 1991-2021 across all the sites, individual sites vary, let's just start with that
@@ -19,7 +17,7 @@ group = "slv"
 varslist = ["T2M", "T10M" ,"PRECTOT"] # vars should work as a list now
 vars = varslist[0]
 
-fileslist = find_MERRA2_files(dir, freq1, freq2, group, str(start_yr), str(end_yr))
+fileslist = find_MERRA2_files(MERRA2_ROOT, freq1, freq2, group, str(start_yr), str(end_yr))
 # print(type(fileslist))
 # print(fileslist[-1])
 ds_MERRA2 = xr.open_mfdataset(fileslist[:10])[vars]
