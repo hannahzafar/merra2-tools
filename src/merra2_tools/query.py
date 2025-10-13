@@ -1,7 +1,8 @@
-#!/usr/bin/env python
-# Input args to query for relevant MERRA-2 files
-# Refer to MERRA-2 File Specification
-# MERRA-2 data are organized into collections: freq_dims_group_HV
+"""
+Input args to query for relevant MERRA-2 files
+Refer to MERRA-2 File Specification
+MERRA-2 data are organized into collections: freq_dims_group_HV
+"""
 
 import numpy as np
 import argparse
