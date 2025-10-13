@@ -1,12 +1,9 @@
 #!/usr/bin/env python
-#FIX: Rename this script Virtualize merra data?
-# I would honestly love to make this a package (?) I could import elsewhere, that would be kind of cool
-
 # Script used to process MERRA-2 data for fluxnet analysis
 
 import xarray as xr
 import sys
-from MERRA2_query import find_MERRA2_files
+from .query import find_MERRA2_files
 from virtualizarr import open_virtual_dataset
 
 #TODO: Turn these into path objects? Vzarr seems to use them?
