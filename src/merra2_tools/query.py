@@ -8,10 +8,14 @@ import numpy as np
 import argparse
 import glob
 
+#TODO: Move these to a utils function
 # Function to print for debugging
 def print_special(*lists):
     for list in lists:
         print(*list, sep="\n")
+
+def print_val_and_type(item):
+    print(f"{item} ({type(item)})")
 
 # Function to parse MERRA2 collection arguments
 def MERRA2_parser():
