@@ -14,13 +14,16 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2025.10.5-hbd8a1cb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/cached-property-1.5.2-hd8ed1ab_1.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/cached_property-1.5.2-pyha770c72_1.tar.bz2
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/cramjam-2.11.0-py313h7ef63f5_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/crc32c-2.7.1.post0-py313h54dd161_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/deprecated-1.2.18-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/donfig-0.8.1.post1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/fastparquet-2024.11.0-py313h29aa505_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/fsspec-2025.9.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/h5netcdf-1.6.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/h5py-3.14.0-nompi_py313h253c126_101.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/hdf5-1.14.6-nompi_h6e4c0c1_103.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/kerchunk-0.2.9-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/keyutils-1.6.3-hb9d3cd8_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/krb5-1.21.3-h659f571_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ld_impl_linux-64-2.44-ha97dd6f_2.conda
@@ -153,6 +156,26 @@ packages:
   - pkg:pypi/cached-property?source=hash-mapping
   size: 11065
   timestamp: 1615209567874
+- conda: https://conda.anaconda.org/conda-forge/linux-64/cramjam-2.11.0-py313h7ef63f5_1.conda
+  sha256: 019e3e749f303c8928c00b8e8aabffe093c20afe989ed6cd7f23e47d35882a53
+  md5: 659bcf75e77ecb81d11beb3a44b28816
+  depends:
+  - python
+  - libgcc >=14
+  - libstdcxx >=14
+  - libgcc >=14
+  - __glibc >=2.17,<3.0.a0
+  - python_abi 3.13.* *_cp313
+  constrains:
+  - __glibc >=2.17
+  arch: x86_64
+  platform: linux
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/cramjam?source=hash-mapping
+  size: 1811237
+  timestamp: 1756864814761
 - conda: https://conda.anaconda.org/conda-forge/linux-64/crc32c-2.7.1.post0-py313h54dd161_0.conda
   sha256: 4f7f134dee2869a2dae792df7e3de806fb7b5a0748fd344897b784f4f5dbc5fe
   md5: 603220445070aeb8ad934a4958be42cf
@@ -190,6 +213,27 @@ packages:
   - pkg:pypi/donfig?source=hash-mapping
   size: 22491
   timestamp: 1734368817583
+- conda: https://conda.anaconda.org/conda-forge/linux-64/fastparquet-2024.11.0-py313h29aa505_1.conda
+  sha256: 3e9e7e7b3f9c22db29f3cdcd7161d8c78ec354b5aacb4e034625c35fb62a1818
+  md5: afe73e61121730cb6ea71bf59cd4ce62
+  depends:
+  - __glibc >=2.17,<3.0.a0
+  - cramjam >=2.3
+  - fsspec
+  - libgcc >=14
+  - numpy >=1.23,<3
+  - packaging
+  - pandas >=1.5.0
+  - python >=3.13,<3.14.0a0
+  - python_abi 3.13.* *_cp313
+  arch: x86_64
+  platform: linux
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/fastparquet?source=hash-mapping
+  size: 519803
+  timestamp: 1759327458460
 - conda: https://conda.anaconda.org/conda-forge/noarch/fsspec-2025.9.0-pyhd8ed1ab_0.conda
   sha256: 05e55a2bd5e4d7f661d1f4c291ca8e65179f68234d18eb70fc00f50934d3c4d3
   md5: 76f492bd8ba8a0fb80ffe16fc1a75b3b
@@ -249,6 +293,21 @@ packages:
   purls: []
   size: 3710057
   timestamp: 1753357500665
+- conda: https://conda.anaconda.org/conda-forge/noarch/kerchunk-0.2.9-pyhd8ed1ab_0.conda
+  sha256: c398236e08ba439835b87ba6f667a40071eeefbe87a266a8b553329213aa48f5
+  md5: 1ac32c617d6029d926c38775db939e0a
+  depends:
+  - fsspec >=2025.2.0
+  - numcodecs
+  - python >=3.11
+  - ujson
+  - zarr >=3.0.1
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/kerchunk?source=hash-mapping
+  size: 60088
+  timestamp: 1754001740475
 - conda: https://conda.anaconda.org/conda-forge/linux-64/keyutils-1.6.3-hb9d3cd8_0.conda
   sha256: 0960d06048a7185d3542d850986d807c6e37ca2e644342dd0c72feefcf26c2a4
   md5: b38117a3c920364aff79f870c984b4a3
@@ -598,7 +657,7 @@ packages:
 - pypi: .
   name: merra2-tools
   version: 0.1.0
-  sha256: 2ce896892970ea9c35454a10af04094aca0235ba017b275d4df60b9b58f8aa31
+  sha256: e0ec3e5b33d655eeb9f5828dbcea5fa8a62c84f00bb949fa85f91fe9fb6012e3
   requires_python: '>=3.11'
   editable: true
 - conda: https://conda.anaconda.org/conda-forge/linux-64/msgpack-python-1.1.2-py313h7037e92_0.conda

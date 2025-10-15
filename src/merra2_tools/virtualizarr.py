@@ -26,13 +26,14 @@ def create_vzarr_store(filepaths):
         urls=file_urls,
         parser=HDFParser(),
         registry=registry,
+        # loadable_variables=['time'],
+        # decode_times=True,
     )
 
     vstore = Path.cwd() / "virtual_store"
     vstore.mkdir(exist_ok=True)
-    
 
-    vds.vz.to_kerchunk(f"{vstore.name}/vstore.json", format="json")
+    vds.vz.to_kerchunk(f"{vstore.name}/vstore.parquet", format="parquet")
 
     #FIX: What should this function return?
     return
