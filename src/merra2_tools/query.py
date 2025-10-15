@@ -6,7 +6,6 @@ MERRA-2 data are organized into collections: freq_dims_group_HV
 
 import numpy as np
 import argparse
-import glob
 
 #TODO: Move these to a utils function
 # Function to print for debugging
@@ -97,9 +96,9 @@ def find_MERRA2_files(dir, freq1, freq2, group, start_yr, end_yr):
 
     flist = []
     for year in years:
-        filenames = sorted(glob.glob(f"{dir}/Y{year}/M*/MERRA2.{freqF}_2d_{args.group}_{HV}.*.nc4"))
+        pattern = f"Y{year}/M*/MERRA2.{freqF}_2d_{args.group}_{HV}.*.nc4"
+        filenames = list(sorted(dir.glob(pattern)))
         flist = flist + filenames
 
-    # print_special(flist[:10],flist[-10:])
     return flist
 
