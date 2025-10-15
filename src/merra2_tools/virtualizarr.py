@@ -9,7 +9,7 @@ from .query import find_MERRA2_files
 ds_MERRA2 = xr.open_mfdataset(fileslist[:10])[vars]
 # print(ds_MERRA2)
 
-#TODO: Run this test?
+def create_vzarr_store(filepaths):
 virtual_datasets = [open_virtual_dataset(filepath, 
                                          loadable_variables=["time"],
                                          decode_times=True,
