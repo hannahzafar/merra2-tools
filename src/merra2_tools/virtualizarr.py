@@ -1,7 +1,6 @@
 """ Insert description """
-import xarray as xr
 from obstore.store import LocalStore
-from virtualizarr import open_virtual_dataset, open_virtual_mfdataset
+from virtualizarr import open_virtual_mfdataset
 from virtualizarr.parsers import HDFParser
 from virtualizarr.registry import ObjectStoreRegistry
 from pathlib import Path
