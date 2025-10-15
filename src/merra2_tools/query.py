@@ -76,6 +76,8 @@ def MERRA2_parser():
 
 # Function to find MERRA2 files based on args
 def find_MERRA2_files(dir, freq1, freq2, group, start_yr, end_yr):
+    #TODO: Check dir is a path obj:
+
     # Import parser and get args from inputs
     parser = MERRA2_parser()
     argslist = [freq1, freq2, group, start_yr, end_yr]
