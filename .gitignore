@@ -6,3 +6,4 @@ MERRA2_all
 .pixi
 *.egg-info
 __pycache__/
+virtual_store/
