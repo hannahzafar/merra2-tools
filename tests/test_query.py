@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Script used to process MERRA-2 data for fluxnet analysis
+# Test find_MERRA2_files function
 
 
 from merra2_tools import MERRA2_ROOT, find_MERRA2_files

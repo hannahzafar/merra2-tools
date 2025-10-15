@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-# Script used to process MERRA-2 data for fluxnet analysis
+# Test create_vzarr_store function
+# Contains old notes used to process MERRA-2 data for fluxnet analysis
 
 
 from merra2_tools import MERRA2_ROOT, find_MERRA2_files, create_vzarr_store
