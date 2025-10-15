@@ -16,5 +16,4 @@ vars = varslist[0]
 
 fileslist = find_MERRA2_files(MERRA2_ROOT, freq1, freq2, group, str(start_yr), str(end_yr))
 
-vds = create_vzarr_store(fileslist[:20])
-print(vds)
+create_vzarr_store(fileslist[:20])

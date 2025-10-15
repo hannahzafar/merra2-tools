@@ -29,14 +29,18 @@ def create_vzarr_store(filepaths):
         registry=registry,
     )
 
-    return vds
+    vstore = Path.cwd() / "virtual_store"
+    vstore.mkdir(exist_ok=True)
+    
+
+    vds.vz.to_kerchunk(f"{vstore.name}/vstore.json", format="json")
+
+    #FIX: What should this function return?
+    return
     #NOTE: So I have it able to open multiple files into a vds. How can I write that to a store? Do I want to try icechunk? (I was using json and parquet previously
     # Is this process fast enough that I don't really need to "slice the data" (i.e., select only N+S America and vars I want) or is that still significant?
 
 
-    # This is old script for when I want to write to a store
-    # vstore_path = Path.cwd() /"virtual_store"
-    # vstore_path.mkdir(exist_ok=True)
 
 '''
 ds_MERRA2 = xr.open_mfdataset(flist)[var]
