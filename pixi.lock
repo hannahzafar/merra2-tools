@@ -168,8 +168,6 @@ packages:
   - python_abi 3.13.* *_cp313
   constrains:
   - __glibc >=2.17
-  arch: x86_64
-  platform: linux
   license: MIT
   license_family: MIT
   purls:
@@ -226,8 +224,6 @@ packages:
   - pandas >=1.5.0
   - python >=3.13,<3.14.0a0
   - python_abi 3.13.* *_cp313
-  arch: x86_64
-  platform: linux
   license: BSD-3-Clause
   license_family: BSD
   purls:
@@ -657,7 +653,7 @@ packages:
 - pypi: .
   name: merra2-tools
   version: 0.1.0
-  sha256: e0ec3e5b33d655eeb9f5828dbcea5fa8a62c84f00bb949fa85f91fe9fb6012e3
+  sha256: 9cfe6e513e52dc2d54da76492308b4a0df78d3a4913de37d6e1cf3161fea9753
   requires_python: '>=3.11'
   editable: true
 - conda: https://conda.anaconda.org/conda-forge/linux-64/msgpack-python-1.1.2-py313h7037e92_0.conda
