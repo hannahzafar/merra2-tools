@@ -47,5 +47,5 @@ def create_vzarr_store(filepaths):
 
     vds.vz.to_kerchunk(f"{vstore.name}/vstore.parquet", format="parquet")
 
-    #FIX: What should this function return?
-    return
+    #NOTE: Returns the path to the virtualized dataset
+    return f"{vstore.name}/vstore.parquet"
