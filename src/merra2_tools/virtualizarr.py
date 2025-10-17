@@ -5,6 +5,14 @@ from virtualizarr.parsers import HDFParser
 from virtualizarr.registry import ObjectStoreRegistry
 from pathlib import Path
 
+# Ignore warnings that do not apply to our use case
+import warnings
+warnings.filterwarnings(
+  "ignore",
+  message="Numcodecs codecs are not in the Zarr version 3 specification*",
+  category=UserWarning
+)
+
 #TODO: Update description
 #TODO: Implement more checks it is a Path obj
 
