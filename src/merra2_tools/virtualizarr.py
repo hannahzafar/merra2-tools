@@ -1,4 +1,7 @@
-""" Insert description """
+"""
+Create a virtualized dataset reference parquet from a list of Path filepaths at the current working directory
+
+"""
 from obstore.store import LocalStore
 from virtualizarr import open_virtual_mfdataset
 from virtualizarr.parsers import HDFParser
@@ -15,6 +18,7 @@ warnings.filterwarnings(
 
 #TODO: Update description
 #TODO: Implement more checks it is a Path obj
+#NOTE: Currently writing to parquet (worked previously with JSON), but parquet preferred (?)
 
 def create_vzarr_store(filepaths):
     # Build registry dict over all unique parent dirs in filepaths
@@ -45,21 +49,3 @@ def create_vzarr_store(filepaths):
 
     #FIX: What should this function return?
     return
-    #NOTE: So I have it able to open multiple files into a vds. How can I write that to a store? Do I want to try icechunk? (I was using json and parquet previously
-    # Is this process fast enough that I don't really need to "slice the data" (i.e., select only N+S America and vars I want) or is that still significant?
-
-
-
-'''
-ds_MERRA2 = xr.open_mfdataset(flist)[var]
-
-# Sel only N+S America
-americas_MERRA2 = ds_MERRA2.sel(
-    lon=slice(-170, -30),
-    lat=slice(-60,80)
-)
-
-print(americas_MERRA2)
-#FIX: doing the sel takes so long, I think I'm just gonna virtualize
-#FIX: Make this script the generation of the virtualizarr
-'''
