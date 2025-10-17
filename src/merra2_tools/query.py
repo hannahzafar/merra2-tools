@@ -59,18 +59,6 @@ def MERRA2_parser():
                         help = f"End Year ({year_list[0]}-{year_list[-1]}), defaults to start_yr",
                         )
 
-    #NOTE: I got rid of this for now, since it makes more sense to specify vars later?
-    #NOTE: Var returns a LIST of values
-    #TODO: Ideally this would check if these vars are valid in that collection group
-    # varlist = ["T2M", "T10M" ,"PRECTOT"]
-    # parser.add_argument('--vars',
-    #                     metavar='var',
-    #                     type=str,
-    #                     required=True,
-    #                     nargs='+',
-    #                     choices=varlist,
-    #                     help = f"MERRA-2 Variable(s) ({', '.join(varlist)})",
-    #                     )
     return parser
 
 
@@ -89,7 +77,6 @@ def find_MERRA2_files(dir, freq1, freq2, group, start_yr, end_yr):
     # if args.end_yr is None:
     #     args.end_yr=args.start_yr
 
-    # var = args.vars
 
     # Hard code other vars:
     HV = 'Nx'
