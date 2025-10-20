@@ -7,6 +7,8 @@ from virtualizarr import open_virtual_mfdataset
 from virtualizarr.parsers import HDFParser
 from virtualizarr.registry import ObjectStoreRegistry
 from pathlib import Path
+import h5py
+import pandas as pd
 
 # Ignore warnings that do not apply to our use case
 import warnings
@@ -19,6 +21,23 @@ warnings.filterwarnings(
 #TODO: Update description
 #TODO: Implement more checks it is a Path obj
 #NOTE: Currently writing to parquet (worked previously with JSON), but parquet preferred (?)
+
+# Function for debugging compression info mismatch
+def get_codec_info(path):
+    """Safely extract compression info from the first dataset in a NetCDF file."""
+    info = {"file": str(path), "compression": None, "shuffle": None}
+    try:
+        with h5py.File(path, "r") as f:
+            for name, dset in f.items():
+                if isinstance(dset, h5py.Dataset):
+                    info["variable_checked"] = name
+                    info["compression"] = dset.compression
+                    info["shuffle"] = dset.shuffle
+                    break
+    except Exception:
+        raise
+    return info
+
 
 def create_vzarr_store(filepaths):
     # Build registry dict over all unique parent dirs in filepaths
@@ -52,7 +71,16 @@ def create_vzarr_store(filepaths):
 
     # Handle compression mismatch
     except NotImplementedError as e:
-        print(e)
+        if "ManifestArray class cannot concatenate arrays which were stored using different codecs" in str(e):
+            print(f"{e}")
+            print("\nChecking compression info for each file...")
+            codecs = [get_codec_info(file) for file in filepaths]
+            codec_df = pd.DataFrame(codecs)
+            print(codec_df[["compression", "shuffle"]].value_counts(dropna=False))
+        else:
+            raise
+    except Exception as e:
+        raise
 
     return
 

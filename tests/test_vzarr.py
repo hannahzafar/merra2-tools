@@ -51,15 +51,3 @@ create_vzarr_store(fileslist)
         #         info = f"{fpath} {vname}"
         #     break
 
-import h5py
-
-def get_codecs(path, var_name="T2M"):
-    with h5py.File(path, "r") as f:
-        if var_name not in f:
-            return "missing"
-        dset = f[var_name]
-        # Compression name is 'gzip' for zlib, or None if uncompressed
-        return f"compression={dset.compression}, shuffle={dset.shuffle}"
-
-for file in fileslist:
-    print(file.name, get_codecs(file))
