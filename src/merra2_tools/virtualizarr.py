@@ -34,18 +34,25 @@ def create_vzarr_store(filepaths):
 
     file_urls = [file.as_uri() for file in filepaths]
 
-    vds = open_virtual_mfdataset(
-        urls=file_urls,
-        parser=HDFParser(),
-        registry=registry,
-        # loadable_variables=['time'],
-        # decode_times=True,
-    )
+    # Debugging for compression mismatch
+    try:
+        vds = open_virtual_mfdataset(
+            urls=file_urls,
+            parser=HDFParser(),
+            registry=registry,
+            # loadable_variables=['time'],
+            # decode_times=True,
+        )
+        vstore_path = Path.cwd() / "virtual_store"
+        vstore_path.mkdir(exist_ok=True)
+        vds.vz.to_kerchunk(f"{vstore_path.name}/vstore.parquet", format="parquet")
 
-    vstore = Path.cwd() / "virtual_store"
-    vstore.mkdir(exist_ok=True)
+        #NOTE: Returns the path to the virtualized dataset
+        return f"{vstore_path.name}/vstore.parquet"
 
-    vds.vz.to_kerchunk(f"{vstore.name}/vstore.parquet", format="parquet")
+    # Handle compression mismatch
+    except NotImplementedError as e:
+        print(e)
 
-    #NOTE: Returns the path to the virtualized dataset
-    return f"{vstore.name}/vstore.parquet"
+    return
+
