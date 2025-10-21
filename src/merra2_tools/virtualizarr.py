@@ -24,7 +24,14 @@ warnings.filterwarnings(
 
 # Function for debugging compression info mismatch
 def get_codec_info(path):
-    """Safely extract compression info from the first dataset in a NetCDF file."""
+    """Extract compression info from the first dataset in a NetCDF file. 
+    Args: 
+        path (Path object): Path to .nc4 file
+
+    Returns:
+        info (dict): filename, compression, and shuffle information
+
+    """
     info = {"file": str(path), "compression": None, "shuffle": None}
     try:
         with h5py.File(path, "r") as f:
@@ -35,11 +42,21 @@ def get_codec_info(path):
                     info["shuffle"] = dset.shuffle
                     break
     except Exception:
+    #TODO: Check for valid .nc4 (or just HDF5?) AND WITH data variables (returns empty if no vars but still valid file)
         raise
     return info
 
 
 def create_vzarr_store(filepaths):
+    """ create virtual Zarr stores for lists of .nc4 filepaths. Creates 1 store if all uniform compression types or a store for each compression type.
+
+    Args:
+        filepaths (list): list of filepath Path objects
+
+    Returns: 
+        Path (or list of Paths) to virtual store(s)
+
+    """
     # Build registry dict over all unique parent dirs in filepaths
     registry_map = {}
     for file in filepaths:
