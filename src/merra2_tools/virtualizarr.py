@@ -67,20 +67,49 @@ def create_vzarr_store(filepaths):
         vds.vz.to_kerchunk(f"{vstore_path.name}/vstore.parquet", format="parquet")
 
         #NOTE: Returns the path to the virtualized dataset
+        print(f"Created virtual Zarr store at {vstore_path}")
+
         return f"{vstore_path.name}/vstore.parquet"
 
     # Handle compression mismatch
     except NotImplementedError as e:
         if "ManifestArray class cannot concatenate arrays which were stored using different codecs" in str(e):
             print(f"{e}")
+
             print("\nChecking compression info for each file...")
             codecs = [get_codec_info(file) for file in filepaths]
-            codec_df = pd.DataFrame(codecs)
-            print(codec_df[["compression", "shuffle"]].value_counts(dropna=False))
+            codec_df = pd.DataFrame(codecs) # Make a df of codec info
+            codec_df = codec_df.fillna({"compression": "None", "shuffle": False}) # Fill Nonetype values
+            print(codec_df[["compression", "shuffle"]].value_counts())
+
+            # Split into group of filses by compression
+            groups = codec_df.groupby(["compression", "shuffle"])["file"].apply(list)
+            vstore_list = []
+            i = 1
+            for multi_idx, filepaths in groups.items():
+                # print(f"MultiIndex: {multi_idx}")
+                file_urls = [Path(file).as_uri() for file in filepaths]
+                vds = open_virtual_mfdataset(
+                    urls=file_urls,
+                    parser=HDFParser(),
+                    registry=registry,
+                    # loadable_variables=['time'],
+                    # decode_times=True,
+                )
+                vstore_path = Path.cwd() / "virtual_store"
+                vstore_path.mkdir(exist_ok=True)
+                vstore_name = f"vstore{i}.parquet"
+                vstore_list.append(vstore_name)
+                vds.vz.to_kerchunk(f"{vstore_path.name}/{vstore_name}", format="parquet")
+                i+=1
+
+            print(f"Created {len(vstore_list)} separate virtual Zarr stores per compression type at {vstore_path}")
+            return [f"{vstore_path.name}/{vstore}.parquet" for vstore in vstore_list] 
+
         else:
             raise
+
     except Exception as e:
         raise
 
-    return
 
