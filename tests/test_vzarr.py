@@ -14,9 +14,8 @@ group = "slv"
 
 fileslist = find_MERRA2_files(MERRA2_ROOT, freq1, freq2, group, str(start_yr), str(end_yr))
 
-# vstore_loc = create_vzarr_store(fileslist)
-# print(vstore_loc)
-create_vzarr_store(fileslist)
+vstore_loc = create_vzarr_store(fileslist)
+print(vstore_loc)
 
 ### DEBUGGING ####
 

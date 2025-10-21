@@ -8,5 +8,12 @@ import warnings
 warnings.filterwarnings("ignore", category=xr.SerializationWarning)
 
 # Pass consolidated = False to suppress warning about .zmetadata
-ds = xr.open_dataset("reference::virtual_store/vstore.parquet", engine="zarr", consolidated=False)
-print(ds)
+# Test a few years (same compression type)
+# ds = xr.open_dataset("reference::virtual_store/vstore.parquet", engine="zarr", consolidated=False)
+# print(ds)
+
+# Test multiple stores by compression type:
+ds1 = xr.open_dataset("reference::virtual_store/vstore1.parquet", engine="zarr", consolidated=False)
+ds2 = xr.open_dataset("reference::virtual_store/vstore2.parquet", engine="zarr", consolidated=False)
+# print(ds1["time"])
+# print(ds2["time"])
