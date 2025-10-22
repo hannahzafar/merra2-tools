@@ -1,10 +1,10 @@
 transfer*/
 MERRA2_all
 *.ipynb*
+virtual_store/
+tests/*.txt
 
 # pixi environments
 .pixi
 *.egg-info
 __pycache__/
-virtual_store/
-*.txt
