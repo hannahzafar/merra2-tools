@@ -1,9 +1,18 @@
 [project]
 authors = [{name = "Hannah Zafar", email = "hannah.zafar@nasa.gov"}]
-dependencies = []
 description = "Tools for MERRA-2 data processing"
 name = "merra2-tools"
 requires-python = ">= 3.11"
+dependencies = [
+  "numpy >=2.3.3,<3", 
+  "pandas >=2.3.3,<3",
+  "xarray >=2025.10.1,<2026", # test only?
+  "h5netcdf >=1.6.4,<2", 
+  "virtualizarr >=2.1.2,<3", 
+  "kerchunk >=0.2.9,<0.3", 
+  "fastparquet >=2024.11.0,<2025", 
+  "netcdf4 >=1.7.3,<2", 
+]
 version = "0.1.0"
 
 [build-system]
