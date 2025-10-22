@@ -132,6 +132,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pathlib-abc-0.5.1-pyh9692d8f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pcre2-10.46-h1321c63_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pillow-11.3.0-py313ha492abd_3.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/pip-25.2-pyh145f28c_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/pipdeptree-2.29.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pixman-0.46.4-h54a6638_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pthread-stubs-0.4-hb9d3cd8_1002.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.2.5-pyhcf101f3_0.conda
@@ -1638,7 +1640,7 @@ packages:
 - pypi: .
   name: merra2-tools
   version: 0.1.0
-  sha256: 3ba0f0536f44ab8cb749bf6b2a0af16c41bf0f653db4909fc4c3d0c92066025e
+  sha256: 4a4ceb0478ad1cee81ff15f289bbc3a19b5275fdfb583f61676567d646a8516b
   requires_python: '>=3.11'
   editable: true
 - conda: https://conda.anaconda.org/conda-forge/linux-64/msgpack-python-1.1.2-py313h7037e92_0.conda
@@ -1907,6 +1909,30 @@ packages:
   - pkg:pypi/pillow?source=hash-mapping
   size: 1040551
   timestamp: 1758208668856
+- conda: https://conda.anaconda.org/conda-forge/noarch/pip-25.2-pyh145f28c_0.conda
+  sha256: 20fe420bb29c7e655988fd0b654888e6d7755c1d380f82ca2f1bd2493b95d650
+  md5: e7ab34d5a93e0819b62563c78635d937
+  depends:
+  - python >=3.13.0a0
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/pip?source=hash-mapping
+  size: 1179951
+  timestamp: 1753925011027
+- conda: https://conda.anaconda.org/conda-forge/noarch/pipdeptree-2.29.0-pyhd8ed1ab_0.conda
+  sha256: 84bd86c2bdf6becce4ab038916562e1f9d3b8277a4b0943a59fc233873065280
+  md5: d344179518e821579d0995f1cd8051b2
+  depends:
+  - packaging >=25
+  - pip >=25.2
+  - python >=3.10
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/pipdeptree?source=hash-mapping
+  size: 32448
+  timestamp: 1760124797318
 - conda: https://conda.anaconda.org/conda-forge/linux-64/pixman-0.46.4-h54a6638_1.conda
   sha256: 43d37bc9ca3b257c5dd7bf76a8426addbdec381f6786ff441dc90b1a49143b6a
   md5: c01af13bdc553d1a8fbfff6e8db075f0

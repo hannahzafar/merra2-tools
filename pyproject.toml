@@ -1,9 +1,15 @@
 [project]
 authors = [{name = "Hannah Zafar", email = "hannah.zafar@nasa.gov"}]
-dependencies = []
 description = "Tools for MERRA-2 data processing"
 name = "merra2-tools"
 requires-python = ">= 3.11"
+dependencies = [
+  "numpy",
+  "pandas",
+  "h5py", 
+  "obstore",
+  "virtualizarr"
+]
 license = { text = "Apache-2.0" }
 version = "0.1.0"
 
@@ -29,5 +35,6 @@ kerchunk = ">=0.2.9,<0.3"
 fastparquet = ">=2024.11.0,<2025"
 netcdf4 = ">=1.7.3,<2"
 matplotlib = ">=3.10.7,<4"
+pipdeptree = ">=2.29.0,<3"
 
 [tool.pixi.tasks]
