@@ -6,8 +6,8 @@ from .virtualizarr import create_vzarr_store
 
 # What is imported with "from merra2_tools import *"
 __all__ = [
-    'MERRA2_ROOT',
-    'find_MERRA2_files',
-    'print_val_and_type',
-    'create_vzarr_store',
+    "MERRA2_ROOT",
+    "find_MERRA2_files",
+    "print_val_and_type",
+    "create_vzarr_store",
 ]

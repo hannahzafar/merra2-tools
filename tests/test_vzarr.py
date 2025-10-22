@@ -5,14 +5,16 @@
 
 from merra2_tools import MERRA2_ROOT, find_MERRA2_files, create_vzarr_store
 
-#NOTE: How am I going to select years, if Amerflux years varies across sites?
+# NOTE: How am I going to select years, if Amerflux years varies across sites?
 # AmeriFlux FLUXNET spans 1991-2021 across all the sites, individual sites vary, let's just start with that
 start_yr, end_yr = [2014, 2017]
 freq1 = "tavg"
 freq2 = "M"
 group = "slv"
 
-fileslist = find_MERRA2_files(MERRA2_ROOT, freq1, freq2, group, str(start_yr), str(end_yr))
+fileslist = find_MERRA2_files(
+    MERRA2_ROOT, freq1, freq2, group, str(start_yr), str(end_yr)
+)
 
 vstore_loc = create_vzarr_store(fileslist)
 print(vstore_loc)
@@ -44,9 +46,8 @@ print(vstore_loc)
 #             for vname, var in ds.variables.items():
 #                 info = f"{fpath} {vname}: zlib={getattr(var.filters(), 'zlib', 'None')}, filters={getattr(var.filters(), 'shuffle', 'None')}"
 #                 file.write(info + "\n")
-        # with h5netcdf.File(fpath, "r") as f:
-        #     for vname, v in f.variables.items():
-        #         # info = f"{fpath} {vname}: {v.encoding.get("filters", "None")}"
-        #         info = f"{fpath} {vname}"
-        #     break
-
+# with h5netcdf.File(fpath, "r") as f:
+#     for vname, v in f.variables.items():
+#         # info = f"{fpath} {vname}: {v.encoding.get("filters", "None")}"
+#         info = f"{fpath} {vname}"
+#     break

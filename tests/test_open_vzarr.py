@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 # Suppress fill values warning
 import warnings
+
 warnings.filterwarnings("ignore", category=xr.SerializationWarning)
 
 # Pass consolidated = False to suppress warning about .zmetadata
@@ -14,8 +15,12 @@ warnings.filterwarnings("ignore", category=xr.SerializationWarning)
 # print(ds)
 
 # Test multiple stores by compression type:
-ds1 = xr.open_dataset("reference::virtual_store/vstore1.parquet", engine="zarr", consolidated=False)
-ds2 = xr.open_dataset("reference::virtual_store/vstore2.parquet", engine="zarr", consolidated=False)
+ds1 = xr.open_dataset(
+    "reference::virtual_store/vstore1.parquet", engine="zarr", consolidated=False
+)
+ds2 = xr.open_dataset(
+    "reference::virtual_store/vstore2.parquet", engine="zarr", consolidated=False
+)
 # print(ds1["time"])
 # print(ds2["time"])
 ds1["T2M"].isel(time=0).plot()
