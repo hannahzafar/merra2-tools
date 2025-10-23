@@ -1640,13 +1640,14 @@ packages:
 - pypi: .
   name: merra2-tools
   version: 0.1.0
-  sha256: 027a35b60f8cfbd15453e7b72e0c77d504f2a7cc89464221a4016a9b1a952b35
+  sha256: 65b566cbeb237a8997a9f883bca0065517d2dc8c30d8c0acfc33403966064e0a
   requires_dist:
   - numpy
   - pandas
   - h5py
   - obstore
-  - virtualizarr
+  - virtualizarr[kerchunk]
+  - kerchunk
   requires_python: '>=3.11'
   editable: true
 - conda: https://conda.anaconda.org/conda-forge/linux-64/msgpack-python-1.1.2-py313h7037e92_0.conda

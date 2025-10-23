@@ -3,12 +3,13 @@ authors = [{name = "Hannah Zafar", email = "hannah.zafar@nasa.gov"}]
 description = "Tools for MERRA-2 data processing"
 name = "merra2-tools"
 requires-python = ">= 3.11"
-dependencies = [
+dependencies = [ # Should I lock versioning for these, at least virtualizarr? #TODO: 
   "numpy",
   "pandas",
   "h5py", 
   "obstore",
-  "virtualizarr"
+  "virtualizarr[kerchunk]", # Optional dependencies in [kerchunk] don't bring in kerchunk?
+  "kerchunk"
 ]
 license = { text = "Apache-2.0" }
 version = "0.1.0"
