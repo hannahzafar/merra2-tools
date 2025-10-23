@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 # Test create_vzarr_store function
-# Contains old notes used to process MERRA-2 data for fluxnet analysis
 
 
 from merra2_tools import MERRA2_ROOT, find_MERRA2_files, create_vzarr_store
 
-# NOTE: How am I going to select years, if Amerflux years varies across sites?
-# AmeriFlux FLUXNET spans 1991-2021 across all the sites, individual sites vary, let's just start with that
 start_yr, end_yr = [2014, 2017]
 freq1 = "tavg"
 freq2 = "M"
