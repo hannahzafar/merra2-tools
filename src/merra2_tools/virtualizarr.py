@@ -49,7 +49,8 @@ def get_codec_info(path):
         raise
     return info
 
-
+#TODO: Is there something I can put in this so designate what folder it outputs it? If I want to make multiple virtual stores, not just across different compressions, but also across collection groups/time. Should this intake some of the MERRA variables that the query did? Or the query defines those and the vzarr dataset inherits those somehow (README? filenaming?)
+#FIX: This won't work for every group... Some are varying chunks? (See statD test)
 def create_vzarr_store(filepaths):
     """create virtual Zarr stores for lists of .nc4 filepaths. Creates 1 store if all uniform compression types or a store for each compression type.
 
@@ -138,5 +139,5 @@ def create_vzarr_store(filepaths):
         else:
             raise
 
-    except Exception as e:
+    except Exception:
         raise
