@@ -39,3 +39,5 @@ matplotlib = ">=3.10.7,<4"
 pipdeptree = ">=2.29.0,<3"
 
 [tool.pixi.tasks]
+test_vz1 = "python tests/test_vzarr.py 2014 2014" # Test creating vstore no compression conflict
+test_vz2 = "python tests/test_vzarr.py 2014 2015" # Test with compression conflict
