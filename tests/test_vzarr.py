@@ -9,12 +9,14 @@ freq1 = "tavg"
 freq2 = "M"
 group = "slv"
 
-fileslist = find_MERRA2_files(
+details, fileslist = find_MERRA2_files(
     MERRA2_ROOT, freq1, freq2, group, str(start_yr), str(end_yr)
 )
 
-vstore_loc = create_vzarr_store(fileslist)
-print(vstore_loc)
+store = create_vzarr_store(details, fileslist)
+print(store)
+# vstore_loc = create_vzarr_store(details, fileslist)
+# print(vstore_loc)
 
 ### DEBUGGING ####
 

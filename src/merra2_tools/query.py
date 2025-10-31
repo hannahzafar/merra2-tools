@@ -109,4 +109,7 @@ def find_MERRA2_files(dir, freq1, freq2, group, start_yr, end_yr):
         filenames = list(sorted(dir.glob(pattern)))
         flist = flist + filenames
 
-    return flist
+    # Also return description of files
+    details = f"{freqF}_{args.group}_{args.start_yr}_{args.end_yr}"
+
+    return details, flist
