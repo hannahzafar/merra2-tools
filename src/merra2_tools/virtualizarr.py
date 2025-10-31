@@ -50,6 +50,7 @@ def get_codec_info(path):
     return info
 
 def create_vzarr_store(details, filepaths):
+#FIX: This won't work for every group... Some are varying chunks? (See statD test)
     """create virtual Zarr stores for lists of .nc4 filepaths. Creates 1 store if all uniform compression types or a store for each compression type.
 
     Args:
