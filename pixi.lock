@@ -1640,7 +1640,7 @@ packages:
 - pypi: .
   name: merra2-tools
   version: 0.1.0
-  sha256: 65b566cbeb237a8997a9f883bca0065517d2dc8c30d8c0acfc33403966064e0a
+  sha256: f8fabf71c361e86096ef9c628c43f060488386b7d70ec036f563b3081ed1a623
   requires_dist:
   - numpy
   - pandas

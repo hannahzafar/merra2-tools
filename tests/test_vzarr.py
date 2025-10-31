@@ -3,8 +3,16 @@
 
 
 from merra2_tools import MERRA2_ROOT, find_MERRA2_files, create_vzarr_store
+import argparse
 
-start_yr, end_yr = [2014, 2017]
+parser = argparse.ArgumentParser(description="Test inputs")
+parser.add_argument("start_yr")
+parser.add_argument("end_yr")
+args = parser.parse_args()
+
+start_yr = int(args.start_yr)
+end_yr = int(args.end_yr)
+# start_yr, end_yr = [2014, 2015]
 freq1 = "tavg"
 freq2 = "M"
 group = "slv"
