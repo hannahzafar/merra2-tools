@@ -138,5 +138,5 @@ def create_vzarr_store(filepaths):
         else:
             raise
 
-    except Exception as e:
+    except Exception:
         raise
