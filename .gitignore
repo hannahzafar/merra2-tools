@@ -1,6 +1,7 @@
 transfer*/
 MERRA2_all
 *.ipynb*
+M2store*/
 virtual_store/
 tests/*.txt
 

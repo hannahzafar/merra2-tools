@@ -49,17 +49,21 @@ def get_codec_info(path):
         raise
     return info
 
-
-def create_vzarr_store(filepaths):
+def create_vzarr_store(details, filepaths):
     """create virtual Zarr stores for lists of .nc4 filepaths. Creates 1 store if all uniform compression types or a store for each compression type.
 
     Args:
-        filepaths (list): list of filepath Path objects
+        details (str): query information returned in find_MERRA2_files
+        filepaths (list): list of filepath Path objects returned in find_MERRA2_files
 
     Returns:
         Path (or list of Paths) to virtual store(s)
 
     """
+    # Create a path for the vzarr store
+    vstore_path = Path.cwd() / f"M2store_{details}"
+    vstore_path.mkdir(exist_ok=True)
+
     # Build registry dict over all unique parent dirs in filepaths
     registry_map = {}
     for file in filepaths:
@@ -82,8 +86,6 @@ def create_vzarr_store(filepaths):
             # loadable_variables=['time'],
             # decode_times=True,
         )
-        vstore_path = Path.cwd() / "virtual_store"
-        vstore_path.mkdir(exist_ok=True)
         vds.vz.to_kerchunk(f"{vstore_path.name}/vstore.parquet", format="parquet")
 
         # NOTE: Returns the path to the virtualized dataset
@@ -121,8 +123,6 @@ def create_vzarr_store(filepaths):
                     # loadable_variables=['time'],
                     # decode_times=True,
                 )
-                vstore_path = Path.cwd() / "virtual_store"
-                vstore_path.mkdir(exist_ok=True)
                 vstore_name = f"vstore{i}.parquet"
                 vstore_list.append(vstore_name)
                 vds.vz.to_kerchunk(
@@ -133,7 +133,7 @@ def create_vzarr_store(filepaths):
             print(
                 f"Created {len(vstore_list)} separate virtual Zarr stores per compression type at {vstore_path}"
             )
-            return [f"{vstore_path.name}/{vstore}.parquet" for vstore in vstore_list]
+            return [f"{vstore_path.name}/{vstore}" for vstore in vstore_list]
 
         else:
             raise
