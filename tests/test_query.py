@@ -12,7 +12,7 @@ varslist = ["T2M", "T10M", "PRECTOT"]  # vars should work as a list now
 vars = varslist[0]
 
 details, fileslist = find_MERRA2_files(
-    MERRA2_ROOT, freq1, freq2, group, str(start_yr), str(end_yr)
+    MERRA2_ROOT, freq1, freq2, group, start_yr, end_yr
 )
 print(details)
 print(fileslist[0])
