@@ -1639,8 +1639,8 @@ packages:
   timestamp: 1760560610181
 - pypi: .
   name: merra2-tools
-  version: 0.1.0
-  sha256: f8fabf71c361e86096ef9c628c43f060488386b7d70ec036f563b3081ed1a623
+  version: 0.2.0
+  sha256: 56ba1ebc95801b1aeb19b75f4cde583ac59a5d4d10b333386ba1d3db3db1c5b7
   requires_dist:
   - numpy
   - pandas
