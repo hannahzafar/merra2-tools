@@ -90,6 +90,10 @@ def find_MERRA2_files(dir, freq1, freq2, group, start_yr, end_yr):
 
     # Import parser and get args from inputs
     parser = MERRA2_parser()
+
+    # Set start_yr and end_yr to strings to iterate over argparse
+    start_yr = str(start_yr)
+    end_yr = str(end_yr)
     argslist = [freq1, freq2, group, start_yr, end_yr]
     args = parser.parse_args(argslist)
 
